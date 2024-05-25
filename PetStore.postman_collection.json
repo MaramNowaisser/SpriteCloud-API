@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "99d2bd78-3a70-4482-a6c2-beb6c48e2840",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27176643"
+	},
+	"item": [
+		{
+			"name": "Upload An Image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the status code is 200 or 201 (OK or Created)\r",
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.response.to.have.status(200) || pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Image upload successful\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.include(\"File uploaded\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"contentType": "image/jpeg",
+							"type": "file",
+							"src": "postman-cloud:///1ef19a68-d82f-4490-8968-69f6cd453929"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/001/uploadImage",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"001",
+						"uploadImage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add New Pet To The Store",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the status code is 200 (OK) or 201 (Created)\r",
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.response.to.have.status(200) || pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Validate the response body to ensure it contains the expected pet details\r",
+							"pm.test(\"Response body contains pet details\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Check if the response has an id property\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"\r",
+							"    // Check if the response has a name property and if it matches the sent data\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData.name).to.eql(\"Kitty\");\r",
+							"\r",
+							"    // Check if the response has a category property with expected values\r",
+							"    pm.expect(jsonData).to.have.property(\"category\");\r",
+							"    pm.expect(jsonData.category).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.category.id).to.eql(0);\r",
+							"    pm.expect(jsonData.category).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData.category.name).to.eql(\"cat\");\r",
+							"\r",
+							"    // Check if the response has a tags property with expected values\r",
+							"    pm.expect(jsonData).to.have.property(\"tags\");\r",
+							"    pm.expect(jsonData.tags).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData.tags[0]).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.tags[0].id).to.eql(0);\r",
+							"    pm.expect(jsonData.tags[0]).to.have.property(\"name\");\r",
+							"\r",
+							"    // Check if the response has a status property and if it matches the sent data\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData.status).to.eql(\"available\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"New Pet added successfully\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).not.eql('0');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"cat\"\r\n  },\r\n  \"name\": \"Kitty\",\r\n  \"photoUrls\": [\r\n    \"cat\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				},
+				"description": "Generated from cURL: Curl\r\n\r\ncurl -X 'POST' \\\r\n  'https://petstore.swagger.io/v2/pet' \\\r\n  -H 'accept: application/json' \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Update An Existing Pet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the status code is 200 (OK) or 201 (Created)\r",
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.response.to.have.status(200) || pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Validate the response body to ensure it contains the updated pet details\r",
+							"pm.test(\"Response body contains updated pet details\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    // Check if the response has an id property\r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"\r",
+							"    // Check if the response has a name property and if it matches the updated data\r",
+							"    pm.expect(jsonData).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData.name).to.eql(\"Kitty\");\r",
+							"\r",
+							"    // Check if the response has a category property with expected values\r",
+							"    pm.expect(jsonData).to.have.property(\"category\");\r",
+							"    pm.expect(jsonData.category).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.category.id).to.eql(0);\r",
+							"    pm.expect(jsonData.category).to.have.property(\"name\");\r",
+							"    pm.expect(jsonData.category.name).to.eql(\"cat\");\r",
+							"\r",
+							"    // Check if the response has a tags property with expected values\r",
+							"    pm.expect(jsonData).to.have.property(\"tags\");\r",
+							"    pm.expect(jsonData.tags).to.be.an(\"array\");\r",
+							"    pm.expect(jsonData.tags[0]).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData.tags[0].id).to.eql(0);\r",
+							"    pm.expect(jsonData.tags[0]).to.have.property(\"name\");\r",
+							"\r",
+							"    // Check if the response has a status property and if it matches the updated data\r",
+							"    pm.expect(jsonData).to.have.property(\"status\");\r",
+							"    pm.expect(jsonData.status).to.eql(\"available\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"cat\"\r\n  },\r\n  \"name\": \"Kitty\",\r\n  \"photoUrls\": [\r\n    \"cat\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Pet By Status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the status code is 200 (OK) or 201 (Created)\r",
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.response.to.have.status(200) || pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Parse response body\r",
+							"var jsonData;\r",
+							"try {\r",
+							"    jsonData = pm.response.json();\r",
+							"\r",
+							"    // Validate the response body to ensure it contains pets with the specified status\r",
+							"    pm.test(\"Response contains pets with the specified status\", function () {\r",
+							"        var expectedStatus = \"available\"; \r",
+							"\r",
+							"        jsonData.forEach(function(pet) {\r",
+							"            pm.expect(pet).to.have.property(\"status\");\r",
+							"            pm.expect(pet.status).to.eql(expectedStatus);\r",
+							"        });\r",
+							"    });\r",
+							"} "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=available",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByStatus"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "available"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Pet By Tags",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the status code is 200 (OK) or 201 (Created)\r",
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.response.to.have.status(200) || pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Parse response body\r",
+							"let jsonData;\r",
+							"try {\r",
+							"    jsonData = pm.response.json();\r",
+							"\r",
+							"    // Ensure the response is an array\r",
+							"    pm.test(\"Response is an array\", function () {\r",
+							"        pm.expect(jsonData).to.be.an('array');\r",
+							"    });\r",
+							"\r",
+							"    if (jsonData.length > 0) {\r",
+							"        // Validate the response body to ensure it contains pets with the specified tags\r",
+							"        pm.test(\"Response contains pets with the specified tags\", function () {\r",
+							"            let expectedTags = [\"Dog\"]; \r",
+							"\r",
+							"            jsonData.forEach(function(pet) {\r",
+							"                pm.expect(pet).to.have.property(\"tags\");\r",
+							"                let petTags = pet.tags.map(tag => tag.name);\r",
+							"                console.log(\"Pet Tags:\", petTags); \r",
+							"                expectedTags.forEach(function(tag) {\r",
+							"                    pm.expect(petTags).to.include(tag);\r",
+							"                });\r",
+							"            });\r",
+							"        });\r",
+							"\r",
+							"        // Additional tests to ensure response structure and data integrity\r",
+							"        pm.test(\"Response has pets with valid id, name, and status properties\", function () {\r",
+							"            jsonData.forEach(function(pet) {\r",
+							"                console.log(\"Pet Object:\", pet); // Log each pet object for debugging\r",
+							"\r",
+							"                pm.test(\"Pet object has id\", function () {\r",
+							"                    pm.expect(pet).to.have.property(\"id\").that.is.a('number');\r",
+							"                });\r",
+							"\r",
+							"                pm.test(\"Pet object has name\", function () {\r",
+							"                    pm.expect(pet).to.have.property(\"name\").that.is.a('string');\r",
+							"                });\r",
+							"\r",
+							"                pm.test(\"Pet object has status\", function () {\r",
+							"                    pm.expect(pet).to.have.property(\"status\").that.is.a('string');\r",
+							"                });\r",
+							"            });\r",
+							"        });\r",
+							"    } else {\r",
+							"        pm.test(\"Response is empty\", function () {\r",
+							"            pm.expect(jsonData.length).to.eql(0);\r",
+							"        });\r",
+							"    }\r",
+							"\r",
+							"} catch (e) {\r",
+							"    console.error(\"Failed to parse JSON response:\", e);\r",
+							"    pm.test(\"Response is valid JSON\", function () {\r",
+							"        pm.expect.fail(\"Response is not valid JSON\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/findByTags?tags=Dog",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"findByTags"
+					],
+					"query": [
+						{
+							"key": "tags",
+							"value": "Dog"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find Pet By ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the status code is 200 (OK) or 201 (Created)\r",
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.response.to.have.status(200) || pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Parse response body\r",
+							"let jsonData;\r",
+							"try {\r",
+							"    jsonData = pm.response.json();\r",
+							"\r",
+							"    // Validate the response body to ensure it contains the correct pet details\r",
+							"    pm.test(\"Response body contains correct pet details\", function () {\r",
+							"        let expectedId = 10; \r",
+							"        let expectedName = \"doggie\";\r",
+							"        let expectedCategory = {\r",
+							"            id: 10,\r",
+							"            name: \"string\"\r",
+							"        }; // Update with the actual category you are expecting\r",
+							"        let expectedStatus = \"Sold\";\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"id\");\r",
+							"        pm.expect(jsonData.id).to.eql(expectedId);\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"name\");\r",
+							"        pm.expect(jsonData.name).to.eql(expectedName);\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"category\");\r",
+							"        pm.expect(jsonData.category).to.have.property(\"id\");\r",
+							"        pm.expect(jsonData.category.id).to.eql(expectedCategory.id);\r",
+							"        pm.expect(jsonData.category).to.have.property(\"name\");\r",
+							"        pm.expect(jsonData.category.name).to.eql(expectedCategory.name);\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"photoUrls\");\r",
+							"        pm.expect(jsonData.photoUrls).to.be.an('array');\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"tags\");\r",
+							"        pm.expect(jsonData.tags).to.be.an('array');\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"status\");\r",
+							"        pm.expect(jsonData.status).to.eql(expectedStatus);\r",
+							"    });\r",
+							"\r",
+							"} catch (e) {\r",
+							"    console.error(\"Failed to parse JSON response:\", e);\r",
+							"    pm.test(\"Response is valid JSON\", function () {\r",
+							"        pm.expect.fail(\"Response is not valid JSON\");\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"// Additional tests to ensure response structure and data integrity\r",
+							"pm.test(\"Response has valid id and name properties\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"id\").that.is.a('number');\r",
+							"    pm.expect(jsonData).to.have.property(\"name\").that.is.a('string');\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/10",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"10"
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\r\n  'https://petstore.swagger.io/v2/pet/09' \\\r\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Updates a Pet in the store With form data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Check if the status code is 200 (OK) or 201 (Created)\r",
+							"pm.test(\"Status code is 200 or 201\", function () {\r",
+							"    pm.response.to.have.status(200) || pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"// Parse response body\r",
+							"let jsonData;\r",
+							"try {\r",
+							"    jsonData = pm.response.json();\r",
+							"\r",
+							"    // Validate the response body to ensure it contains the updated pet details\r",
+							"    pm.test(\"Response body contains updated pet details\", function () {\r",
+							"        pm.expect(jsonData).to.have.property(\"code\");\r",
+							"        pm.expect(jsonData.code).to.eql(200);\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"type\");\r",
+							"        pm.expect(jsonData.type).to.eql(\"unknown\");\r",
+							"\r",
+							"        pm.expect(jsonData).to.have.property(\"message\");\r",
+							"        pm.expect(jsonData.message).to.be.a('string');\r",
+							"    });\r",
+							"\r",
+							"} catch (e) {\r",
+							"    console.error(\"Failed to parse JSON response:\", e);\r",
+							"    pm.test(\"Response is valid JSON\", function () {\r",
+							"        pm.expect.fail(\"Response is not valid JSON\");\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "status",
+							"value": "Sold",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/pet/10",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"pet",
+						"10"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

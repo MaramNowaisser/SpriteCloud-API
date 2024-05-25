@@ -1,0 +1,299 @@
+{
+	"id": "418930f7-5c3a-4e32-8fa0-3ecbf0f9cf7a",
+	"name": "PetStore",
+	"timestamp": "2024-05-25T10:40:09.280Z",
+	"collection_id": "27176643-7d455b02-9cd1-4776-9d69-85a23c2a0097",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 17,
+	"delay": 0,
+	"persist": false,
+	"status": "finished",
+	"startedAt": "2024-05-25T10:40:07.911Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "06889cad-17d3-4827-89fb-2d039f2e32ae",
+			"name": "Upload An Image",
+			"url": "https://petstore.swagger.io/v2/pet/001/uploadImage",
+			"time": 131,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201": true,
+				"Image upload successful": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Image upload successful": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				131
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201": true,
+					"Image upload successful": true
+				}
+			]
+		},
+		{
+			"id": "4f29979f-279d-4fda-9f4f-e063e45df76a",
+			"name": "Add New Pet To The Store",
+			"url": "https://petstore.swagger.io/v2/pet",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201": true,
+				"Response body contains pet details": true,
+				"New Pet added successfully": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains pet details": {
+					"pass": 1,
+					"fail": 0
+				},
+				"New Pet added successfully": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201": true,
+					"Response body contains pet details": true,
+					"New Pet added successfully": true
+				}
+			]
+		},
+		{
+			"id": "0f37e6e8-a82b-4ba1-a9c2-2c9b01f4f42d",
+			"name": "Update An Existing Pet",
+			"url": "https://petstore.swagger.io/v2/pet",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201": true,
+				"Response body contains updated pet details": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains updated pet details": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201": true,
+					"Response body contains updated pet details": true
+				}
+			]
+		},
+		{
+			"id": "82ecb7b5-1919-4351-af76-584938ec5aa1",
+			"name": "Find Pet By Status",
+			"url": "https://petstore.swagger.io/v2/pet/findByStatus?status=available",
+			"time": 23,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201": true,
+				"Response contains pets with the specified status": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response contains pets with the specified status": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201": true,
+					"Response contains pets with the specified status": true
+				}
+			]
+		},
+		{
+			"id": "eeaefbd2-702e-451c-a2e6-139ecc1e9f12",
+			"name": "Find Pet By Tags",
+			"url": "https://petstore.swagger.io/v2/pet/findByTags?tags=Dog",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201": true,
+				"Response is an array": true,
+				"Response is empty": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is an array": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response is empty": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201": true,
+					"Response is an array": true,
+					"Response is empty": true
+				}
+			]
+		},
+		{
+			"id": "85d08cf1-7593-41ed-b136-1cd23e54aca2",
+			"name": "Find Pet By ID",
+			"url": "https://petstore.swagger.io/v2/pet/10",
+			"time": 11,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201": true,
+				"Response body contains correct pet details": true,
+				"Response has valid id and name properties": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains correct pet details": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has valid id and name properties": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				11
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201": true,
+					"Response body contains correct pet details": true,
+					"Response has valid id and name properties": true
+				}
+			]
+		},
+		{
+			"id": "bc5c30c9-3d1e-424f-9145-534afbf41681",
+			"name": "Updates a Pet in the store With form data",
+			"url": "https://petstore.swagger.io/v2/pet/10",
+			"time": 12,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200 or 201": true,
+				"Response body contains updated pet details": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200 or 201": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response body contains updated pet details": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				12
+			],
+			"allTests": [
+				{
+					"Status code is 200 or 201": true,
+					"Response body contains updated pet details": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 211,
+	"collection": {
+		"requests": [
+			{
+				"id": "06889cad-17d3-4827-89fb-2d039f2e32ae",
+				"method": "POST"
+			},
+			{
+				"id": "4f29979f-279d-4fda-9f4f-e063e45df76a",
+				"method": "POST"
+			},
+			{
+				"id": "0f37e6e8-a82b-4ba1-a9c2-2c9b01f4f42d",
+				"method": "PUT"
+			},
+			{
+				"id": "82ecb7b5-1919-4351-af76-584938ec5aa1",
+				"method": "GET"
+			},
+			{
+				"id": "eeaefbd2-702e-451c-a2e6-139ecc1e9f12",
+				"method": "GET"
+			},
+			{
+				"id": "85d08cf1-7593-41ed-b136-1cd23e54aca2",
+				"method": "GET"
+			},
+			{
+				"id": "bc5c30c9-3d1e-424f-9145-534afbf41681",
+				"method": "POST"
+			}
+		]
+	}
+}

@@ -11,8 +11,7 @@ Why the tests you decided to automate are the most important?
 
 - I decided to auomate the Pet module because of:
 
-   1- High Frequency of Use: Tests for APIs that are frequently accessed ensure reliability and performance where it's most needed.
+   - High Frequency of Use: Tests for APIs that are frequently accessed ensure reliability and performance where it's most needed.
 
-   2- Core Functionality: Automating tests for APIs central to the application's operations helps catch critical bugs early.
-
+   - Core Functionality: Automating tests for APIs central to the application's operations helps catch critical bugs early.
 

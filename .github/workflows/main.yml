@@ -1,4 +1,4 @@
-name: Automated API tests using Postman CLI
+name: Automated API tests using Newman CLI
 
 on: push
 
@@ -7,14 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install Postman CLI
-        run: |
-          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-      - name: Login to Postman CLI
-        run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+      - name: Install Newman CLI
+        run: npm install -g newman
       - name: Run API tests
         run: |
-          postman collection run "27176643-99d2bd78-3a70-4482-a6c2-beb6c48e2840" -e "27176643-9a2f2321-09c6-4908-ab12-18fb1b752e8d" --reporters cli,json --reporter-json-export "results.json"
+          newman run "https://api.getpostman.com/collections/27176643-99d2bd78-3a70-4482-a6c2-beb6c48e2840?apikey=${{ secrets.POSTMAN_API_KEY }}" --environment "https://api.getpostman.com/environments/27176643-9a2f2321-09c6-4908-ab12-18fb1b752e8d?apikey=${{ secrets.POSTMAN_API_KEY }}" -r cli,json --reporter-json-export "results.json"
       - name: Upload results to GitHub Artifacts
         uses: actions/upload-artifact@v3
         with:

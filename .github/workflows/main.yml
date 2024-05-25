@@ -1,4 +1,4 @@
-name: Automated API Tests using Postman CLI
+name: Automated API tests using Postman CLI
 
 on: push
 
@@ -14,9 +14,4 @@ jobs:
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
       - name: Run API tests
         run: |
-          postman collection run "27176643-7d455b02-9cd1-4776-9d69-85a23c2a0097" --reporters cli,json --reporter-json-export output.json
-      - name: Upload Test Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: postman-test-report
-          path: output.json
+          postman collection run "27176643-7d455b02-9cd1-4776-9d69-85a23c2a0097"

@@ -6,17 +6,17 @@ jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
+      - uses: actions/checkout@v3
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-
-      - name: Run API Tests
+      - name: Run API tests
         run: |
-          postman collection run "27176643-7d455b02-9cd1-4776-9d69-85a23c2a0097"
-
+          postman collection run "27176643-7d455b02-9cd1-4776-9d69-85a23c2a0097" --reporters cli,json --reporter-json-export output.json
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: postman-test-report
+          path: output.json
